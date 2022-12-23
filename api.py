@@ -4,6 +4,7 @@ from skimage.io import imread, imsave
 from skimage.transform import estimate_transform, warp
 from time import time
 from PIL import Image
+import cv2
 
 from predictor import PosPrediction
 
@@ -22,14 +23,14 @@ class PRN:
         self.resolution_op = 256
 
         #---- load detectors
-        if is_dlib:
-            import dlib
-            detector_path = os.path.join(prefix, 'Data/net-data/mmod_human_face_detector.dat')
-            self.face_detector = dlib.cnn_face_detection_model_v1(
-                    detector_path)
+        # if is_dlib:
+        #     import dlib
+        #     detector_path = os.path.join(prefix, 'Data/net-data/mmod_human_face_detector.dat')
+        #     self.face_detector = dlib.cnn_face_detection_model_v1(
+        #             detector_path)
 
-        if is_opencv:
-            import cv2
+        # if is_opencv:
+        #     import cv2
 
         #---- load PRN 
         self.pos_predictor = PosPrediction(self.resolution_inp, self.resolution_op)
@@ -206,7 +207,6 @@ class PRN:
         colors = image[ind[:,1], ind[:,0], :] # n x 3
 
         return colors
-
 
 
 
